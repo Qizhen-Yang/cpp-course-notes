@@ -1,43 +1,53 @@
 /*
-	使用递归进行
-	2就是三个1叠加
-	3就是三个2叠加
-	所以应当先把1画出来
-*/
+ *作者: Qizhen Yang
+ *输入1~10之间的数字，就会画出相应大小的南蛮图腾
+ *只是一个习题，非法输入等情况都没有考虑
+ *仅仅作为递归算法的一个小练习
+ */
 #include <stdio.h>
+#include <stdlib.h>
 
-int Two(int time)						//计算二的time次幂
-{
-	if (time == 0)
-		return 1;						//2^0=1
-	else
-		return 2 * Two(time - 1);		//2^n=2*2^(n-1)
-}
+char canvas [2049][1025];			//画布: 1024x2048
 
-void Draw(int size, int space)			//size: 大小; space: 空格数量
+void draw(
+			int size, 				//大小
+			int x, 					//标记横轴
+			int y					//标记纵轴
+)
 {
-	if (size == 1)
+	if (size == 1)					//边长为2的基础三角形
 	{
-		printf(" /\\\n/__\\");			/*当大小为1时打印: 
-											 /\
-											/__\ */
+		//第一行
+		canvas [x][y] = ' ';
+		canvas [x+1][y] = '/';
+		canvas [x+2][y] = '\\';
+		canvas [x+3][y] = ' ';
+		//第二行
+		canvas [x][y+1] = '/';
+		canvas [x+1][y+1] = '_';
+		canvas [x+2][y+1] = '_';
+		canvas [x+3][y+1] = '\\';
 	}
-	else
+	else							//递归部分
 	{
-		for (int i = Two(size - 1); i > 0; i --)
-			printf(" ");				//打印出合适数量的空格
-		Draw(size - 1, space + Two(size - 1));	//递归
-		printf("\n");					//换行
-		for (int i = Two(size - 1); i > 0; i --)
-			printf(" ");				//打印出合适数量的空格
-		Draw(size - 1, space + Two(size - 1));	//递归
-		Draw(size - 1, space + Two(size - 1));	//递归
+		int len = 1 << (size - 1);	//2的(size-1)次幂
+		draw(size - 1, x + len, y);
+		draw(size - 1, x, y + len);
+		draw(size - 1, x + len * 2, y + len);
 	}
 }
 
 int main()
 {
 	int n;
-	scanf("%d", &n);					//输入大小
-	Draw(n, 0);							//画图
+	scanf("%d", &n);				//输入
+	draw(n, 0, 0);					//从坐标(0,0)开始作图
+	int len = 1 << n;				//2的n次幂
+	for (int y = 0; y < len; y ++)
+	{
+		for (int x = 0; x < len*2; x ++)
+			printf("%c", canvas [x][y]);
+		printf("\n");
+	}
+	system("pause");
 }
