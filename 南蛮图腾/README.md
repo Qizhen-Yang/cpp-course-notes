@@ -1,4 +1,3 @@
-<title>我的C++笔记</title>
 <https://noi.top/questions/1306>
 # 南蛮图腾
 有一些少数民族的图腾是分形三角形，你能画出来吗？
