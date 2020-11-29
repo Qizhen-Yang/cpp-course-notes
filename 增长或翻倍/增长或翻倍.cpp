@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 
 int calc(
 	int s, 								//起始
@@ -36,5 +35,4 @@ int main()
 		printf("Error\n");				//提示错误
 	else								//正常运行
 		printf("%d\n", a);				//打印次数
-	system("pause");
 }
