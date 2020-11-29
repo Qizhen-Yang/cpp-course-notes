@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 
 char canvas [2049][1025];			//画布: 1024x2048
 
@@ -43,5 +42,4 @@ int main()
 			printf("%c", canvas [x][y]);
 		printf("\n");
 	}
-	system("pause");
 }
