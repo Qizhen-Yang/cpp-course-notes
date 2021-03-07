@@ -16,15 +16,15 @@ int main(int argv, char *argc[])
 		scanf("%d", &b[i]);
 		aa[i] = aa[i] + a[i];
 	}
-	int jg=0;
-	int j=n;
+	int result = 0;
+	int j = n;
 	for(int i = 0; i <= n; i ++)
 	{
 		while(aa[i] + bb[j] > t && j >= 1 )
 			j --;
 		if(aa[i] + bb[j] <=t )
-			jg = (jg > i + j) ? jg : (i + j);
+			result = (result > i + j) ? result : (i + j);
 	}
-	printf("%d", jg);
+	printf("%d", result);
 	return 0;
 }
